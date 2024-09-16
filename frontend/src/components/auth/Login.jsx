@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import FormField from '../FormField';
 import '../../styles/Login.css';
 
 export default function Login() {
@@ -6,50 +8,63 @@ export default function Login() {
         username: '',
         password: '',
     });
+    const [errors, setErrors] = useState({});
     
-    const handleSubmitEvent = (e) => {
-        e.preventDefault();
-        if (input.username !== "" && input.password !== "") {
-          //dispatch action from hooks
-        }
 
-        alert("please provide a valid input");
+    const checkErrors = (input) => {
+        const errors = {};
+        const { username, password } = input;
+
+        if (username.length === 0) {
+            errors.username = 'Please provide a username';
+        }
+        if (password.length === 0) {
+            errors.password = 'Please provide a password'; 
+        }
+        
+        return errors;
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setErrors(checkErrors(input));
       };
 
-    const handleInput = (e) => {
-        const { name, value } = e.target;
+    const handleInput = (data) => {
+        const { name, value } = data;
         setInput((prev) => ({
-          ...prev,
-          [name]: value,
+            ...prev,
+            [name]: value,
         }));
     };
     
     return (
-        <>
+        <div className='form-wrapper'>
             <h1>Login</h1>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <div className='form-content'>
-                    <label>
-                        <span>Username</span>
-                        <input 
-                            type="text" 
-                            name="username" 
-                            onChange={handleInput}
-                        />
-                    </label>
-                    <label>
-                        <span>Password</span>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            onChange={handleInput} 
-                        />
-                    </label>
-                    <a href='#' className='reset-link'>Forgot password</a>
+                    <FormField 
+                        title='Username' 
+                        type='text' 
+                        name='username' 
+                        onChange={handleInput}
+                    />
+                    { errors.username && <div className='error-message'>{errors.username}</div> }
+                    <FormField 
+                        title='Password'
+                        type='password'
+                        name='password'
+                        onChange={handleInput}
+                    />
+                    { errors.password && <div className='error-message'>{errors.password}</div> }
+                    <Link to='/reset' className='reset-link'>Forgot password</Link>
                     <input type="submit" value="Login" />
-                    <div>Don't have an account? <a href='#' className='register-link'>Register</a></div>
+                    <div className='register-link-wrapper'>
+                        <span>Don't have an account? </span>
+                        <Link to='/register' className='register-link'>Register</Link>
+                    </div>
                 </div>
             </form>
-        </>
+        </div>
     );
 };
