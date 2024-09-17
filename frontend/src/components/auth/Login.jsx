@@ -70,6 +70,9 @@ export default function Login() {
                     />
                     <Link to='/reset' className='reset-link'>Forgot password</Link>
                     <input type="submit" value="Login" />
+                    { 
+                        error && <div className='error-message'> { error } </div> 
+                    }
                     <div className='register-link-wrapper'>
                         <span>Don't have an account? </span>
                         <Link to='/register' className='register-link'>Register</Link>

@@ -9,49 +9,65 @@ export default function useAuth() {
     const navigate = useNavigate();
     
     const register = async (data) => {
-        const { username, email, password } = data;
+        // const { username, email, password } = data;
         
-        return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`, { username, email, password })
-            .then((res) => {
-                if (res.data.length !== 0) {
-                    setError('User exists');
-                }
-                else {
-                    saveUser({ username, email, password });
-                    navigate('/home');
-                }
-            }).catch((err) => {
+        return axios.post('/users', data)
+            .then(res => {
+                navigate('/login');
+            })
+            .catch(err => {
                 setError(err.message);
             });
+        // return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`, { username, email, password })
+        //     .then((res) => {
+        //         if (res.data.length !== 0) {
+        //             setError('User exists');
+        //         }
+        //         else {
+        //             navigate('/login');
+        //         }
+        //     }).catch((err) => {
+        //         setError(err.message);
+        //     });
     };
 
     const login = async (data) => {
-        const { username, password } = data;
+        // const { username, password } = data;
         
-        return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`)
-            .then((res) => {
-                axios.get(`http://localhost:3000/users`)
-                .then(res => {
-                    if (res.data.find(user => user.username === username && user.password === password)) {
-                        saveUser(res.data[0]);
-                        navigate('/home');
-                    }
-                    else {
-                        setError('Invalid username or password');
-                    }
-                });
-            }).catch((err) => {
+        return axios.post('/login', data)
+            .then(res => {
+                saveUser(res.data);
+                navigate('/home');
+            })
+            .catch(err => {
                 setError(err.message);
             });
+        // return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`)
+        //     .then((res) => {
+        //         axios.get(`http://localhost:3000/users`)
+        //         .then(res => {
+        //             if (res.data.find(user => user.username === username && user.password === password)) {
+        //                 saveUser(res.data[0]);
+        //                 navigate('/home');
+        //             }
+        //             else {
+        //                 setError('Invalid username or password');
+        //             }
+        //         });
+        //     }).catch((err) => {
+        //         setError(err.message);
+        //     });
     };
 
     const logout = () => {
-        
+        localStorage.removeItem('user');
+        navigate('/login');
     }
     
     return {
         register,
-        login,   
+        login,
+        logout, 
         error,
     };
 }

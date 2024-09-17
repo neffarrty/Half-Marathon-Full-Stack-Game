@@ -80,9 +80,9 @@ export default function Register() {
                         error={errors.email}
                     />
                     <input type="submit" value="Register" />
-                    <div className='error-message'>
-                        { error }
-                    </div>
+                    { 
+                        error && <div className='error-message'> { error } </div> 
+                    }
                     <div className='register-link-wrapper'>
                         <span>Don't have an account? </span>
                         <Link to='/login' className='register-link'>Login</Link>
