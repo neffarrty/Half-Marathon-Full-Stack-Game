@@ -5,5 +5,227 @@
       "username": "admin",
       "password": "qwerty"
     }
+  ],
+  "cards": [
+    {
+      "name": "Captain America",
+      "img": "/images/Captain_America_headshot.webp",
+      "description": "Captain America is a super-soldier known for his unwavering sense of justice, leadership, and dedication to protecting freedom. Armed with his iconic shield, he fights to defend the world from evil forces.",
+      "cost": 7,
+      "attack": 6,
+      "defense": 6,
+      "card_bg": "#3b5998",
+      "text_bg": "#3b5900",
+      "id": "4776"
+    },
+    {
+      "name": "Iron Man",
+      "img": "/images/Iron_Man_headshot.webp",
+      "description": "Iron Man is a genius billionaire playboy philanthropist who fights crime in his advanced, weaponized suit of armor. He uses technology to protect the world.",
+      "cost": 9,
+      "attack": 8,
+      "defense": 5,
+      "card_bg": "#ff4c4c",
+      "text_bg": "#3b5900",
+      "id": "2ecc"
+    },
+    {
+      "name": "Thor",
+      "img": "/images/Thor_headshot.webp",
+      "description": "Thor, the god of thunder, wields his mighty hammer Mjolnir and fights to protect the realms. He is a powerful Asgardian warrior.",
+      "cost": 10,
+      "attack": 9,
+      "defense": 8,
+      "card_bg": "#00bfff",
+      "text_bg": "#3b5900",
+      "id": "1f9f"
+    },
+    {
+      "name": "Black Widow",
+      "img": "/images/Black_Widow_headshot.webp",
+      "description": "Black Widow is a highly skilled spy and combatant. She uses her intelligence and agility to protect the world from the shadows.",
+      "cost": 5,
+      "attack": 7,
+      "defense": 5,
+      "card_bg": "#4b0082",
+      "text_bg": "#000000",
+      "id": "cd9c"
+    },
+    {
+      "name": "Hawkeye",
+      "img": "/images/Hawkeye_headshot.webp",
+      "description": "Hawkeye is a master archer, using his precise marksmanship and agility to fight alongside the Avengers.",
+      "cost": 4,
+      "attack": 6,
+      "defense": 4,
+      "card_bg": "#8b4513",
+      "text_bg": "#3b5900",
+      "id": "3c29"
+    },
+    {
+      "name": "Hulk",
+      "img": "/images/Hulk_headshot.webp",
+      "description": "Hulk possesses immense strength and near invulnerability, transforming into a powerful green giant when angered.",
+      "cost": 9,
+      "attack": 10,
+      "defense": 9,
+      "card_bg": "#228b22",
+      "text_bg": "#3b5900",
+      "id": "fa20"
+    },
+    {
+      "name": "Spider-Man",
+      "img": "/images/Spider_Man_headshot.webp",
+      "description": "Spider-Man uses his agility, spider-sense, and web-slinging abilities to fight crime and protect his city.",
+      "cost": 6,
+      "attack": 7,
+      "defense": 6,
+      "card_bg": "#ff0000",
+      "text_bg": "#3b5900",
+      "id": "2c25"
+    },
+    {
+      "name": "Doctor Strange",
+      "img": "/images/Doctor_Strange_headshot.webp",
+      "description": "Doctor Strange is the Sorcerer Supreme, using magic and mystic arts to defend the Earth from supernatural threats.",
+      "cost": 8,
+      "attack": 8,
+      "defense": 7,
+      "card_bg": "#6a0dad",
+      "text_bg": "#3b5900",
+      "id": "a744"
+    },
+    {
+      "name": "Black Panther",
+      "img": "/images/Black_Panther_headshot.webp",
+      "description": "Black Panther, the king of Wakanda, uses his enhanced abilities and vibranium suit to protect his kingdom and the world.",
+      "cost": 7,
+      "attack": 7,
+      "defense": 8,
+      "card_bg": "#000000",
+      "text_bg": "#3b5900",
+      "id": "2970"
+    },
+    {
+      "name": "Scarlet Witch",
+      "img": "/images/Scarlet_Witch_headshot.webp",
+      "description": "Scarlet Witch has the ability to manipulate reality and use chaos magic to fight against powerful foes.",
+      "cost": 8,
+      "attack": 9,
+      "defense": 5,
+      "card_bg": "#ff1493",
+      "text_bg": "#3b5900",
+      "id": "0953"
+    },
+    {
+      "name": "Vision",
+      "img": "/images/Vision_headshot.webp",
+      "description": "Vision is a synthezoid with the ability to phase through objects, fly, and wield immense energy.",
+      "cost": 7,
+      "attack": 7,
+      "defense": 7,
+      "card_bg": "#32cd32",
+      "text_bg": "#3b5900",
+      "id": "7014"
+    },
+    {
+      "name": "Ant-Man",
+      "img": "/images/Ant_Man_headshot.webp",
+      "description": "Ant-Man can shrink to the size of an ant or grow to enormous proportions, using his size-changing abilities to fight evil.",
+      "cost": 4,
+      "attack": 5,
+      "defense": 5,
+      "card_bg": "#b22222",
+      "text_bg": "#3b5900",
+      "id": "414f"
+    },
+    {
+      "name": "Wasp",
+      "img": "/images/Wasp_headshot.webp",
+      "description": "Wasp uses her shrinking technology and combat skills to fight alongside Ant-Man, utilizing agility and intelligence.",
+      "cost": 5,
+      "attack": 6,
+      "defense": 5,
+      "card_bg": "#ffdab9",
+      "text_bg": "#3b5900",
+      "id": "82e4"
+    },
+    {
+      "name": "Star-Lord",
+      "img": "/images/Star_Lord_headshot.webp",
+      "description": "Star-Lord leads the Guardians of the Galaxy with his cunning, combat skills, and love for music.",
+      "cost": 6,
+      "attack": 6,
+      "defense": 6,
+      "card_bg": "#2e8b57",
+      "text_bg": "#3b5900",
+      "id": "7080"
+    },
+    {
+      "name": "Gamora",
+      "img": "/images/Gamora_headshot.webp",
+      "description": "Gamora is a deadly assassin and member of the Guardians of the Galaxy, known for her exceptional combat abilities.",
+      "cost": 6,
+      "attack": 8,
+      "defense": 6,
+      "card_bg": "#556b2f",
+      "text_bg": "#3b5900",
+      "id": "ed6e"
+    },
+    {
+      "name": "Drax",
+      "img": "/images/Drax_headshot.webp",
+      "description": "Drax is a warrior with immense strength and combat abilities, driven by a desire for revenge against evil forces.",
+      "cost": 5,
+      "attack": 7,
+      "defense": 7,
+      "card_bg": "#8fbc8f",
+      "text_bg": "#3b5900",
+      "id": "9fc6"
+    },
+    {
+      "name": "Rocket Raccoon",
+      "img": "/images/Rocket_Raccoon_headshot.webp",
+      "description": "Rocket is a genetically enhanced raccoon with expert marksmanship and technical skills, often using his wit and weapons in battle.",
+      "cost": 4,
+      "attack": 6,
+      "defense": 4,
+      "card_bg": "#ffa500",
+      "text_bg": "#3b5900",
+      "id": "5cae"
+    },
+    {
+      "name": "Groot",
+      "img": "/images/Groot_headshot.webp",
+      "description": "Groot is a sentient tree-like creature with regenerative abilities and a powerful physical presence in combat.",
+      "cost": 6,
+      "attack": 6,
+      "defense": 8,
+      "card_bg": "#a52a2a",
+      "text_bg": "#3b5900",
+      "id": "b452"
+    },
+    {
+      "name": "Captain Marvel",
+      "img": "/images/Captain_Marvel_headshot.webp",
+      "description": "Captain Marvel possesses cosmic powers, incredible strength, and the ability to fly, making her one of the most powerful heroes.",
+      "cost": 9,
+      "attack": 9,
+      "defense": 7,
+      "card_bg": "#ff4500",
+      "text_bg": "#3b5900",
+      "id": "0eec"
+    },
+    {
+      "name": "Falcon",
+      "img": "/images/Falcon_headshot.webp",
+      "description": "Falcon uses advanced winged technology to fly and fight, serving as a skilled combatant and leader.",
+      "cost": 5,
+      "attack": 6,
+      "defense": 5,
+      "card_bg": "#4682b4",
+      "text_bg": "#3b5900",
+      "id": "043c"
+    }
   ]
 }
