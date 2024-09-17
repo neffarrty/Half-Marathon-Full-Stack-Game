@@ -1,4 +1,4 @@
-export default function FormField({ title, type, name, onChange }) {
+export default function FormField({ title, type, name, onChange, error }) {
     const handleChange = (e) => {
         onChange(e.target);
     };
@@ -11,6 +11,7 @@ export default function FormField({ title, type, name, onChange }) {
                 name={name} 
                 onChange={handleChange}
             />
+            { error && <div className='error-message'>{ error }</div> }
         </label>
     );
 };

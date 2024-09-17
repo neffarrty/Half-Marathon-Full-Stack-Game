@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FormField from '../FormField';
+import useAuth from '../../hooks/useAuth';
 import '../../styles/Login.css';
 
 export default function Login() {
@@ -9,8 +10,17 @@ export default function Login() {
         password: '',
     });
     const [errors, setErrors] = useState({});
+    const [submitted, setSubmitted] = useState(false);
+    const { login, error } = useAuth();
     
-
+    useEffect(() => {
+        (async () => {
+            if (submitted && Object.keys(errors).length === 0) {
+                await login(input);
+            }
+        })();
+    }, [errors]);
+    
     const checkErrors = (input) => {
         const errors = {};
         const { username, password } = input;
@@ -28,7 +38,8 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(checkErrors(input));
-      };
+        setSubmitted(true);
+    };
 
     const handleInput = (data) => {
         const { name, value } = data;
@@ -48,15 +59,15 @@ export default function Login() {
                         type='text' 
                         name='username' 
                         onChange={handleInput}
+                        error={errors.username}
                     />
-                    { errors.username && <div className='error-message'>{errors.username}</div> }
                     <FormField 
                         title='Password'
                         type='password'
                         name='password'
                         onChange={handleInput}
+                        error={errors.password}
                     />
-                    { errors.password && <div className='error-message'>{errors.password}</div> }
                     <Link to='/reset' className='reset-link'>Forgot password</Link>
                     <input type="submit" value="Login" />
                     <div className='register-link-wrapper'>
