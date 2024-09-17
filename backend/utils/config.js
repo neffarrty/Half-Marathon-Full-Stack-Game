@@ -8,6 +8,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_HOST = process.env.DB_HOST
 const DB_DIALECT =  process.env.DB_DIALECT
 
+const JWT_SECRET = process.env.JWT_SECRET
 
 module.exports = {
     PORT,
@@ -15,5 +16,6 @@ module.exports = {
     DB_USERNAME,
     DB_PASSWORD,
     DB_HOST,
-    DB_DIALECT
+    DB_DIALECT,
+    JWT_SECRET
 }

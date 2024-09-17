@@ -36,7 +36,7 @@ exports.loginValidator = [
             return          // can't bail other chains
         }
 
-        if (!(await bcrypt.compare(value, user.attr.password))) {
+        if (!(await bcrypt.compare(value, user.password))) {
             throw new Error('Invalid password')
         }
     })
