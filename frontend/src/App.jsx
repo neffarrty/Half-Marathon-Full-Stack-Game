@@ -18,7 +18,7 @@ export default function App() {
 					<Route path='/home' element={<HomePage />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
-					<Route path='/game' element={<GamePage />} />
+					<Route path='/game/:gameId' element={<GamePage />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</UserContext.Provider>

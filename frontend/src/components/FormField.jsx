@@ -1,3 +1,5 @@
+import Error from "./Error";
+
 export default function FormField({ title, type, name, onChange, error }) {
     const handleChange = (e) => {
         onChange(e.target);
@@ -11,7 +13,7 @@ export default function FormField({ title, type, name, onChange, error }) {
                 name={name} 
                 onChange={handleChange}
             />
-            { error && <div className='error-message'>{ error }</div> }
+            <Error error={error} />
         </label>
     );
 };
