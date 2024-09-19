@@ -21,7 +21,7 @@ export default function useAuth() {
         // return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`, { username, email, password })
         //     .then((res) => {
         //         if (res.data.length !== 0) {
-        //             setError('User exists');
+        //             setError('User already exists');
         //         }
         //         else {
         //             navigate('/login');
