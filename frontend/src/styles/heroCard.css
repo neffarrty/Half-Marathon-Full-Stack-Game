@@ -1,0 +1,114 @@
+@import url(https://db.onlinewebfonts.com/c/2da952d097bffd198ec0f0aa3fdd6804?family=JejuHallasan);
+
+body {
+    font-family: "JejuHallasan";
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card-container {
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    position: relative;
+    height: 265px;
+    width: 200px;
+}
+
+.top-section {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.coin-icon {
+    position: absolute;
+    right: -35px;
+    top: -35px;
+    width: 65px;
+}
+
+.level {
+    position: absolute;
+    right: -25px;
+    top: -18px;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 24px;
+}
+
+.image-section {
+    margin: 10px 0;
+}
+
+.character-image {
+    height: 120px;
+    width: 185px;
+    border-radius: 10px;
+}
+
+.character-name {
+    font-size: 18px;
+    color: white;
+    margin: 10px 0;
+}
+
+.text-box {
+    color: white;
+    border-radius: 10px;
+    margin: 5px;
+    height: 60px;
+    width: 180px;
+    text-align: justify;
+    padding: 5px;
+    line-height: 0.6;
+}
+
+.text-box span{
+    font-size: 10px;
+}
+
+.bottom-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sword-icon {
+    position: absolute;
+    bottom: -20px;
+    left: -25px;
+    width: 50px;
+}
+
+.shield-icon {
+    position: absolute;
+    bottom: -20px;
+    right: -25px;
+    width: 50px;
+}
+
+.score-shield {
+    position: absolute;
+    bottom: -5px;
+    right: -12px;
+    font-size: 18px;
+    color: white;
+}
+
+.score-sword {
+    position: absolute;
+    bottom: -5px;
+    left: -10px;
+    font-size: 18px;
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+    padding: 1px;
+}

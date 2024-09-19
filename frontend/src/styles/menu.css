@@ -1,0 +1,44 @@
+@import url(https://db.onlinewebfonts.com/c/2da952d097bffd198ec0f0aa3fdd6804?family=JejuHallasan);
+
+body{
+    background: url("../assets/homepage.jpg") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: "JejuHallasan";
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    width: 540px;
+    padding: 15px 30px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: #6D0909;
+    color: white;
+    font-size: 36px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.text{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button:hover{
+    background-color: #8B0C0C;
+    color: #FFD700;
+    transform: scale(1.05);
+}

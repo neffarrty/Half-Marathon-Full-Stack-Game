@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Card = ({ name, desc }) => {
+export default Card = ({ name, desc }) => {
     const [health, setHealth] = useState(10);
     
     const style = {
@@ -23,5 +23,3 @@ const Card = ({ name, desc }) => {
         </div>
     )
 }
-
-export default Card;
