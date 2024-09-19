@@ -15,6 +15,7 @@ export default function GameBoard() {
     
     return (
         <>
+            <h1>Game</h1>
             <Deck />
             <CardHolder cards={cards}/>
         </>
