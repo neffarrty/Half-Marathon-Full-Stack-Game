@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import FormField from '../FormField';
 import useAuth from '../../hooks/useAuth';
 import '../../styles/Login.css';
@@ -50,35 +50,37 @@ export default function Login() {
     };
     
     return (
-        <div className='form-wrapper'>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div className='form-content'>
-                    <FormField 
-                        title='Username' 
-                        type='text' 
-                        name='username' 
-                        onChange={handleInput}
-                        error={errors.username}
-                    />
-                    <FormField 
-                        title='Password'
-                        type='password'
-                        name='password'
-                        onChange={handleInput}
-                        error={errors.password}
-                    />
-                    <Link to='/reset' className='reset-link'>Forgot password</Link>
-                    <input type="submit" value="Login" />
-                    { 
-                        error && <div className='error-message'> { error } </div> 
-                    }
-                    <div className='register-link-wrapper'>
-                        <span>Don't have an account? </span>
-                        <Link to='/register' className='register-link'>Register</Link>
+        <div className='background'>
+            <div className='form-wrapper'>
+                <h1>Login</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className='form-content'>
+                        <FormField
+                            title='Username'
+                            type='text'
+                            name='username'
+                            onChange={handleInput}
+                            error={errors.username}
+                        />
+                        <FormField
+                            title='Password'
+                            type='password'
+                            name='password'
+                            onChange={handleInput}
+                            error={errors.password}
+                        />
+                        <Link to='/reset' className='reset-link'>Forgot password</Link>
+                        <input type="submit" value="Login" className='submit-btn'/>
+                        {
+                            error && <div className='error-message'> { error } </div>
+                        }
+                        <div className='register-link-wrapper'>
+                            <span>Don't have an account? </span>
+                            <Link to='/register' className='register-link'>Register</Link>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     );
 };
