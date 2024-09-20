@@ -1,0 +1,130 @@
+@import url(https://db.onlinewebfonts.com/c/2da952d097bffd198ec0f0aa3fdd6804?family=JejuHallasan);
+
+.card-container {
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    position: relative;
+    height: 220px;
+    width: 140px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    font-family: "JejuHallasan", sans-serif;
+}
+
+.card-container.animate {
+    transform: translateY(-200px);
+    scale: 1.2;
+}
+
+.card-container.opponent {
+    background: url('../assets/marvel-bkg.png') no-repeat center center;
+}
+
+.top-section {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.coin-card {
+    position: absolute;
+    right: -25px;
+    top: -25px;
+    border-radius: 50%;
+    background-color: yellow;
+    width: 40px;
+    height: 40px;
+    margin-right: 6px;
+    border: 2px solid darkgoldenrod;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cost {
+    color: #000000;
+    font-size: 18px;
+}
+
+.image-section {
+    margin: 10px 0;
+}
+
+.character-image {
+    height: 80px;
+    width: 120px;
+    border-radius: 10px;
+}
+
+.character-name {
+    font-size: 12px;
+    color: white;
+    margin: 10px 0;
+}
+
+.text-box {
+    color: white;
+    border-radius: 10px;
+    margin: 5px 0;
+    height: 60px;
+    width: 120px;
+    text-align: justify;
+    padding: 5px;
+    line-height: 0.6;
+
+}
+
+.text-box span {
+    font-size: 11px;
+}
+
+.bottom-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
+}
+
+.sword {
+    background: url('../assets/sword.png');
+    background-size: cover;
+    position: absolute;
+    bottom: -25px;
+    left: -25px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shield {
+    background: url('../assets/shield.png');
+    background-size: cover;
+    position: absolute;
+    bottom: -20px;
+    right: -25px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-shield {
+    font-size: 20px;
+    color: white;
+}
+
+.score-sword {
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+    padding: 2px;
+}

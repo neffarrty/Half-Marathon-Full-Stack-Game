@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FormField from '../FormField';
+import Error from '../Error';
 import useAuth from '../../hooks/useAuth';
+import '../../styles/Register.css';
 import '../../styles/Register.css';
 
 export default function Register() {
@@ -80,9 +82,7 @@ export default function Register() {
                         error={errors.email}
                     />
                     <input type="submit" value="Register" />
-                    { 
-                        error && <div className='error-message'> { error } </div> 
-                    }
+                    <Error error={error}/>
                     <div className='register-link-wrapper'>
                         <span>Don't have an account? </span>
                         <Link to='/login' className='register-link'>Login</Link>
@@ -91,4 +91,4 @@ export default function Register() {
             </form>
         </div>
     );
-}
+};

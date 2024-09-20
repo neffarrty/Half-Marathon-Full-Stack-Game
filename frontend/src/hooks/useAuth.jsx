@@ -1,17 +1,17 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../contexts/UserContext';
+import useUserContext from '../hooks/useUserContext';
 import axios from 'axios';
 
 export default function useAuth() {
-    const { saveUser } = useContext(UserContext);
+    const { saveUser } = useUserContext();
     const [error, setError] = useState('');
     const navigate = useNavigate();
     
     const register = async (data) => {
         // const { username, email, password } = data;
         
-        return axios.post('/users', data)
+        return axios.post('http://localhost:3001/users', data)
             .then(res => {
                 navigate('/login');
             })
@@ -21,7 +21,7 @@ export default function useAuth() {
         // return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`, { username, email, password })
         //     .then((res) => {
         //         if (res.data.length !== 0) {
-        //             setError('User exists');
+        //             setError('User already exists');
         //         }
         //         else {
         //             navigate('/login');
@@ -34,7 +34,7 @@ export default function useAuth() {
     const login = async (data) => {
         // const { username, password } = data;
         
-        return axios.post('/login', data)
+        return axios.post('http://localhost:3001/login', data)
             .then(res => {
                 saveUser(res.data);
                 navigate('/home');

@@ -1,25 +1,27 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Home from './components/Home';
-import NotFound from './components/NotFound';
-import { UserContext } from './contexts/UserContext';
-import useUser from './hooks/useUser';
+import HomePage from './components/pages/HomePage';
+import GamePage from './components/pages/GamePage';
+import NotFound from './components/pages/NotFound';
+import UserContextProvider from './contexts/user/UserContextProvider';
+import SocketContextLayout from './contexts/socket/SocketContextLayout';
 
 export default function App() {
-	const { user, saveUser } = useUser();
-	
 	return (
 		<Router>
-			<UserContext.Provider value={{ user, saveUser }}>
+			<UserContextProvider>
 				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/home' element={<Home />} />
+					<Route path='/' element={<HomePage />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
+					<Route element={<SocketContextLayout />}>
+						<Route path='/home' element={<HomePage />} />
+						<Route path='/game/:id' element={<GamePage />} />
+					</Route>
 					<Route path='*' element={<NotFound />} />
 				</Routes>
-			</UserContext.Provider>
+			</UserContextProvider>
 		</Router>
 	);
 };

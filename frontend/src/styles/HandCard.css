@@ -1,0 +1,14 @@
+.cards-opponent {
+    display: flex;
+    justify-content: space-around;
+    width: 105%;
+    margin-top: -80px;
+}
+
+.cards-player{
+    display: flex;
+    justify-content: space-around;
+    width: 105%;
+    margin-top: auto;
+    margin-bottom: -80px;
+}
