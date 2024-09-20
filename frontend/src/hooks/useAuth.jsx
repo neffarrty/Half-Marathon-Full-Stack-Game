@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../contexts/UserContext';
+import useUserContext from '../hooks/useUserContext';
 import axios from 'axios';
 
 export default function useAuth() {
-    const { saveUser } = useContext(UserContext);
+    const { saveUser } = useUserContext();
     const [error, setError] = useState('');
     const navigate = useNavigate();
     

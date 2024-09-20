@@ -1,14 +1,15 @@
-import Coins from './Coins.jsx';
-import ActionBar from './ActionBar.jsx';
-import Timer from './Timer.jsx';
-import Player from './Player.jsx';
-import HandCard from './HandCard.jsx';
-import GameField from './GameField.jsx';
-import '../styles/GamePage.css'
-
+import { useState, useEffect } from 'react';
+import useUserContext from '../../hooks/useUserContext.jsx';
+import Coins from '../Coins.jsx';
+import ActionBar from '../ActionBar.jsx';
+import Timer from '../Timer.jsx';
+import Player from '../Player.jsx';
+import HandCard from '../HandCard.jsx';
+import GameField from '../GameField.jsx';
+import '../../styles/GamePage.css';
 
 export default function GamePage() {
-    const { user } = useContext(UserContext);
+    const { user } = useUserContext();
     const [player, setPlayer] = useState({ 
         ...user,
         health: 30,

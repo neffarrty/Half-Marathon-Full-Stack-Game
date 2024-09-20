@@ -1,4 +1,4 @@
-import '../styles/NotFound.css';
+import '../../styles/NotFound.css';
 
 export default function NotFound() {
     return <h1>404 - Not Found</h1>;
