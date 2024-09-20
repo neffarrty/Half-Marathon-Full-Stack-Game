@@ -1,3 +1,5 @@
+import '../styles/Player.css';
+
 export default function Player({ username, hp, avatar }) {
     return (
         <div className='player-container'>
@@ -8,7 +10,7 @@ export default function Player({ username, hp, avatar }) {
                 <img src={avatar} alt={`${username} avatar`} />
             </div>
             <div className='player-hp-container'>
-                <span>♡</span>
+                <span>❤️</span>
                 <span>{hp}</span>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import '../styles/Coins.css';
+
 export default function Coins({ amount, max }) {
     return (
         <div className='coins-container'>

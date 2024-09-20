@@ -1,0 +1,51 @@
+.game-field {
+    height: 500px;
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-line {
+    width: 900px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #F5F5F5;
+}
+
+.opponent-cards {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.player-cards {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.place-card, .end-turn {
+    width: 200px;
+    height: 60px;
+    border: 1px dotted black;
+    position: absolute;
+    top: 55%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+}
+
+.end-turn{
+    top: 45%;
+}
+
+.place-card:hover, .end-turn:hover {
+    background-color:lightgrey;
+}

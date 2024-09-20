@@ -1,0 +1,35 @@
+.coins-container {
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 25px;
+    perspective: 1000px;
+}
+
+.coin {
+    border-radius: 50%;
+    background-color: yellow;
+    width: 30px;
+    height: 30px;
+    animation: spin 5s -1s linear infinite;
+    margin-right: 6px;
+    border: 2px solid darkgoldenrod;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.inactive {
+    border: 2px dotted lightgrey;
+    background-color: transparent;
+}
+
+@keyframes spin {
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(360deg);
+    }
+}
