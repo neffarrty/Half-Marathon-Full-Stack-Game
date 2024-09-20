@@ -31,6 +31,22 @@ const isAuth = (req, res, next) => {
     }
 }
 
+const isSocketAuth = (socket, next) => {
+	const token = socket.handshake.query.token
+	
+	if (!token) {
+	  return next(new Error('JWT token is missing'))
+	}
+	
+	try {
+		const decodedToken = jwt.verify(token, config.JWT_SECRET)
+	  	socket.user = decodedToken
+	  	next()
+	} catch (e) {
+		return next(new Error('Invalid token'))
+	}
+}
+
 const unknownEndpoint = (req, res) => {
     res.status(404).json({ error: 'Unknown endpoint' })
 }
@@ -38,5 +54,6 @@ const unknownEndpoint = (req, res) => {
 module.exports = {
     tokenExtractor,
     isAuth,
+    isSocketAuth,
     unknownEndpoint
 }
