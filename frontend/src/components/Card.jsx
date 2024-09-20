@@ -1,7 +1,7 @@
 import '../styles/Card.css';
 
 export default function Card({ hero, onClick, isActive, isPlayerCard }) {
-    return isPlayerCard? (
+    return isPlayerCard ? (
                 <button
                     className={`card-container ${isActive ? 'animate' : ''} ${isPlayerCard? '' : 'opponent'}`}
                     style={{ backgroundColor: hero.backgroundColor }}

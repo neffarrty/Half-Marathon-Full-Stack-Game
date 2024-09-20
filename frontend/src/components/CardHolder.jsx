@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
 import Card from './Card';
 
 export default function CardHolder({ cards }) {   
     return (
-        <div>
+        <>
             {cards.map(card => {
                 return (
                     <Card
@@ -16,6 +15,6 @@ export default function CardHolder({ cards }) {
                     />
                 )
             })}
-        </div>
+        </>
     );
 };

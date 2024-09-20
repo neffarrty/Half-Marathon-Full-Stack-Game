@@ -1,4 +1,4 @@
-import Error from "./Error";
+import Error from './Error';
 
 export default function FormField({ title, type, name, onChange, error }) {
     const handleChange = (e) => {

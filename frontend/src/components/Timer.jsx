@@ -23,7 +23,7 @@ export default function Timer({ seconds, condition, setCondition }) {
 
     return (
         <div>
-            <div className="time">Time: {time}</div>
+            <div className='time'>Time: {time}</div>
             <div>{condition}</div>
 {/*            <button
                 onClick={() => setCondition(prev => !prev) }
