@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize')
 const sequelize = require('../utils/db')
 
 const User = sequelize.define(
@@ -13,6 +13,10 @@ const User = sequelize.define(
             type: DataTypes.STRING(255),
             allowNull: false,
             unique: true
+        },
+        avatar: {
+            type: DataTypes.TEXT,
+            defaultValue: '/images/avatars/default-avatar.png'
         },
         password: {
             type: DataTypes.TEXT,
