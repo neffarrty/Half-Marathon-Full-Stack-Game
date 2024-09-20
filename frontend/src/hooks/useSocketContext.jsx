@@ -4,9 +4,9 @@ import { SocketContext } from '../contexts/socket/SocketContext';
 export default function useSocketContext() {
     const context = useContext(SocketContext);
 
-    // if (!context) {
-    //     throw new Error('Use context within provider!');
-    // }
+    if (context === undefined) {
+        throw new Error('useSocketContext context within SocketContextProvider!');
+    }
 
     return context;
 };

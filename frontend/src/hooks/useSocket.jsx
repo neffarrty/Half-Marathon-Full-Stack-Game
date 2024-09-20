@@ -1,18 +1,10 @@
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
+import useUserContext from './useUserContext';
 
 export default function useSocket(url) {
     const [socket, setSocket] = useState(null);
-
-    useEffect(() => {
-        setSocket(io(url, {                
-            transports : ['websocket']
-        }));
-
-        return () => {
-            socket.close();
-        }
-    }, []);
+    const { user } = useUserContext();
 
     return socket;
 };

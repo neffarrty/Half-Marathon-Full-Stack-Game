@@ -9,32 +9,17 @@ export default function useAuth() {
     const navigate = useNavigate();
     
     const register = async (data) => {
-        // const { username, email, password } = data;
-        
-        return axios.post('http://localhost:3001/users', data)
+        return axios.post('http://localhost:3000/api/users', data)
             .then(res => {
                 navigate('/login');
             })
             .catch(err => {
                 setError(err.message);
             });
-        // return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`, { username, email, password })
-        //     .then((res) => {
-        //         if (res.data.length !== 0) {
-        //             setError('User already exists');
-        //         }
-        //         else {
-        //             navigate('/login');
-        //         }
-        //     }).catch((err) => {
-        //         setError(err.message);
-        //     });
     };
 
     const login = async (data) => {
-        // const { username, password } = data;
-        
-        return axios.post('http://localhost:3001/login', data)
+        return axios.post('http://localhost:3000/api/login', data)
             .then(res => {
                 saveUser(res.data);
                 navigate('/home');
@@ -42,21 +27,6 @@ export default function useAuth() {
             .catch(err => {
                 setError(err.message);
             });
-        // return axios.get(`http://localhost:3000/users?username=${username}&_limit=1`)
-        //     .then((res) => {
-        //         axios.get(`http://localhost:3000/users`)
-        //         .then(res => {
-        //             if (res.data.find(user => user.username === username && user.password === password)) {
-        //                 saveUser(res.data[0]);
-        //                 navigate('/home');
-        //             }
-        //             else {
-        //                 setError('Invalid username or password');
-        //             }
-        //         });
-        //     }).catch((err) => {
-        //         setError(err.message);
-        //     });
     };
 
     const logout = () => {

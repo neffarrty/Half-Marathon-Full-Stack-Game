@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useUserContext from '../../hooks/useUserContext.jsx';
+import useSocketContext from '../../hooks/useSocketContext.jsx';
 import Coins from '../Coins.jsx';
 import ActionBar from '../ActionBar.jsx';
 import Timer from '../Timer.jsx';
@@ -9,6 +10,7 @@ import GameField from '../GameField.jsx';
 import '../../styles/GamePage.css';
 
 export default function GamePage() {
+    const socket = useSocketContext();
     const { user } = useUserContext();
     const [player, setPlayer] = useState({ 
         ...user,
