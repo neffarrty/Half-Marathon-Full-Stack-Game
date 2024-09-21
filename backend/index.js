@@ -42,18 +42,35 @@ io.on('connection', (socket) => {
 	console.log('a user connected with socket: ', socket.id)
 
 	socket.on('game-search', async (value) => {
+		console.log('game search', socket.id)
 		const rooms = io.sockets.adapter.rooms
 		if (!rooms.has('waiting_room') || rooms.get('waiting_room').size === 0) {
+			console.log('join waiting room', socket.id)
 			socket.join('waiting_room')
 		} else {
+			console.log(socket.id)
 			const waitingRoom = rooms.get('waiting_room')
-			const opponentSocketId = waitingRoom.values().next().value // get first element from Set
+			let opponentSocketId = null
+
+			for (let waitingSocket of waitingRoom.values()) {
+				if (waitingSocket !== socket.id) {
+					opponentSocketId = waitingSocket
+					break
+				}
+			}
+
+			if (opponentSocketId === null) {
+				return
+			}
+
 			const opponentSocket = io.sockets.sockets.get(opponentSocketId)
 			const gameRoomName = `room-${uuidv4()}`
 		
 			opponentSocket.leave('waiting_room')
 			socket.join(gameRoomName)
 			opponentSocket.join(gameRoomName)
+
+			console.log(opponentSocket);
 
 			const currentUser = (await User.findByPk(socket.user.user_id)).toJSON()
 			delete currentUser.password
