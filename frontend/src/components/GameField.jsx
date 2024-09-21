@@ -35,7 +35,7 @@ export default function GameField({ isTurn, setIsTurn, player, setPlayer, oppone
                         hero={hero}
                         // isActive={activeCardIndex === index}
                         // onClick={() => handleCardClick(index)}
-                        // isPlayer={isPlayer}
+                        isPlayer={true}
                     />
                 ))}
             </div>

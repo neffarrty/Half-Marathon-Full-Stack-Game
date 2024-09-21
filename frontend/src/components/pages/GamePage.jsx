@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useLocation} from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext.jsx';
 import useSocketContext from '../../hooks/useSocketContext.jsx';
 import Coins from '../Coins.jsx';
@@ -27,7 +27,16 @@ export default function GamePage() {
         hp: 30,
         coins: 1,
         hand: 5,
-        cards: []
+        cards: [{
+            "name": "Captain America",
+            "img": "/images/cards/captain-america.png",
+            "description": "Captain America is a super-soldier known for his unwavering sense of justice, leadership, and dedication to protecting freedom. Armed with his iconic shield, he fights to defend the world from evil forces.",
+            "cost": 7,
+            "attack": 6,
+            "defense": 6,
+            "bg_color": "#3b5998",
+            "bg_text_color": "#3b5900"
+        }]
     });
     const [isTurn, setIsTurn] = useState(state.turn);
     const [turn, setTurn] = useState(1);

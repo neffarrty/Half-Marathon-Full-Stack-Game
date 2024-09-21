@@ -1,14 +1,19 @@
 .cards-opponent {
+    height: 320px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     width: 105%;
     margin-top: -80px;
 }
 
 .cards-player{
+    height: 320px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     width: 105%;
     margin-top: auto;
     margin-bottom: -80px;
+}
+.cards-opponent:not(:last-child), .cards-player:not(:last-child) {
+    margin-right: 40px;
 }
