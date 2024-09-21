@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import FormField from '../FormField';
 import Error from '../Error';
 import useAuth from '../../hooks/useAuth';
-import '../../styles/Register.css';
 import '../../styles/Register.css';
 
 export default function Register() {
@@ -56,39 +55,41 @@ export default function Register() {
     };
     
     return (
-        <div className='form-wrapper'>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <div className='form-content'>
-                    <FormField
-                        title='Username'
-                        type='text'
-                        name='username'
-                        onChange={handleInput}
-                        error={errors.username}
-                    />
-                    <FormField
-                        title='Password'
-                        type='password'
-                        name='password'
-                        onChange={handleInput}
-                        error={errors.password}
-                    />
-                    <FormField
-                        title='Email'
-                        type='email'
-                        name='email'
-                        onChange={handleInput}
-                        error={errors.email}
-                    />
-                    <input type="submit" value="Register" />
-                    <Error error={error}/>
-                    <div className='register-link-wrapper'>
-                        <span>Don't have an account? </span>
-                        <Link to='/login' className='register-link'>Login</Link>
+        <div className='background'>
+            <div className='form-wrapper'>
+                <h1>Register</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className='form-content'>
+                        <FormField
+                            title='Username'
+                            type='text'
+                            name='username'
+                            onChange={handleInput}
+                            error={errors.username}
+                        />
+                        <FormField
+                            title='Password'
+                            type='password'
+                            name='password'
+                            onChange={handleInput}
+                            error={errors.password}
+                        />
+                        <FormField
+                            title='Email'
+                            type='email'
+                            name='email'
+                            onChange={handleInput}
+                            error={errors.email}
+                        />
+                        <input type="submit" value="Register" />
+                        <Error error={error}/>
+                        <div className='login-link-wrapper'>
+                            <span>Have an account? </span>
+                            <Link to='/login' className='register-link'>Login</Link>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     );
 };
