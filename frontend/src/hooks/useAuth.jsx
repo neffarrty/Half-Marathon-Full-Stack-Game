@@ -9,7 +9,7 @@ export default function useAuth() {
     const navigate = useNavigate();
     
     const register = async (data) => {
-        return axios.post('http://localhost:3000/api/users', data)
+        return axios.post(`${import.meta.env.VITE_HOST_URL}/api/users`, data)
             .then(res => {
                 navigate('/login');
             })
@@ -19,7 +19,7 @@ export default function useAuth() {
     };
 
     const login = async (data) => {
-        return axios.post('http://localhost:3000/api/login', data)
+        return axios.post(`${import.meta.env.VITE_HOST_URL}/api/login`, data)
             .then(res => {
                 saveUser(res.data);
                 navigate('/home');

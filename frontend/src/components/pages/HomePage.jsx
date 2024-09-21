@@ -1,51 +1,27 @@
 import { useState, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { io } from 'socket.io-client';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext';
 import useSocketContext from '../../hooks/useSocketContext';
 
+import '../../styles/menu.css';
+import '../../styles/start_game.css';
+import '../../styles/rules.css';
+
 export default function HomePage() {
     const { user } = useUserContext();
-    const [socket, setSocket] = useState(null);
-    const [isSearching, setIsSearching] = useState(false);
+    const socket = useSocketContext();
+    const [isSearchVisible, setSearchVisible] = useState(false);
+    const [areRulesVisible, setRulesVisible] = useState(false);
     const navigate = useNavigate();
-    
-    useEffect(() => {
-        const newSocket = io(import.meta.env.VITE_HOST_URL, {
-            query: {
-                'token': user.token
-            }
-        });
-
-        newSocket.on('connect_error', (err) => {
-            console.log("Connection Error: ", err.message);
-        });
-        
-        newSocket.on('connect_failed', (err) => {
-            console.log("Connection Failed: ", err.message);
-        });
-        
-        newSocket.on('disconnect', (err) => {
-            console.log("Disconnected: ", err.message);
-        });
-
-        setSocket(newSocket);
-
-        return () => {
-            newSocket.close();
-        }
-    }, [user.token]);
 
     const onGameFound = (gameId) => {
-        setIsSearching(false);
+        setSearchVisible(false);
         navigate(`/game/${gameId}`);
     };
 
-    const onGameSearch = (token) => {
-        if (socket) {
-            socket.emit('game-search', { token });
-            setIsSearching(true);
-        }
+    const gameSearch = () => {
+        setSearchVisible(true);
+        socket.emit('game-search', { query: { token: user.token } });
     }
     
     useEffect(() => {
@@ -58,5 +34,52 @@ export default function HomePage() {
         }
     }, [socket]);
 
-    return user ? <button onClick={ () => onGameSearch(user.token) }>Start game</button> : <Navigate to='/login'/>;
+    if(!user){
+        return <Navigate to = '/login' />
+    }
+
+    return (
+        <div className="container">
+            <div className="button" onClick={() => {
+                    setSearchVisible(true);
+                    gameSearch();
+                }}>
+                <span className="text">Start game</span>
+            </div>
+            {isSearchVisible && (
+                <div id="search" className="search">
+                    <div className="search-content">
+                        <div className="search_btn_cnl" onClick={() => setSearchVisible(false)}>
+                            <span className="text">Cancel</span>
+                        </div>
+                        <div className="search-text">
+                            <p className="dots">Search</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <div className="button" onClick={() => setRulesVisible(true)}>
+                <span className="text">Rules</span>
+            </div>
+            {areRulesVisible && (
+                <div id="rules" className="rules">
+                    <div className="rules-content">
+                        <div className="rules_btn_cnl" onClick={() => setRulesVisible(false)}>
+                            <span className="text">Quit</span>
+                        </div>
+                        <div className="rules-text">
+                            <p>Rules</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <div className="button">
+                <Link to='/login' style={{ color: 'white', textDecoration: 'none' }}>
+                    Quit game
+                </Link>
+            </div>
+        </div>
+    );
 }
