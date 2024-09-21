@@ -21,7 +21,7 @@
   },
   {
     "name": "Thor",
-    "img": "/images/cards/cards/thor.png",
+    "img": "/images/cards/thor.png",
     "description": "Thor, the god of thunder, wields his mighty hammer Mjolnir and fights to protect the realms. He is a powerful Asgardian warrior.",
     "cost": 10,
     "attack": 9,
@@ -61,7 +61,7 @@
   },
   {
     "name": "Spider-Man",
-    "img": "/images/cards/spide-man.png",
+    "img": "/images/cards/spider-man.png",
     "description": "Spider-Man uses his agility, spider-sense, and web-slinging abilities to fight crime and protect his city.",
     "cost": 6,
     "attack": 7,

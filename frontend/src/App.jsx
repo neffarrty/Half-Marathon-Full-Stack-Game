@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import HomePage from './components/pages/HomePage';
@@ -12,12 +12,12 @@ export default function App() {
 		<Router>
 			<UserContextProvider>
 				<Routes>
-					<Route path='/' element={<HomePage />} />
+					<Route path='/' element={<Navigate to='home' />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
 					<Route element={<SocketContextLayout />}>
 						<Route path='/home' element={<HomePage />} />
-						<Route path='/game/:id' element={<GamePage />} />
+						<Route path='/game' element={<GamePage />} />
 					</Route>
 					<Route path='*' element={<NotFound />} />
 				</Routes>

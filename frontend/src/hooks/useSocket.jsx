@@ -7,35 +7,37 @@ export default function useSocket(url) {
     const { user } = useUserContext();
 
     useEffect(() => {
-        const newSocket = io(url, {
-            transports: ['websocket'],
-            query: {
-                'token': user.token
-            }
-        });
-
-        if (newSocket) {
-            newSocket.on('connect_error', (err) => {
-                console.log("Connection Error: ", err);
-            });
-            
-            newSocket.on('connect_failed', (err) => {
-                console.log("Connection Failed: ", err.message);
-            });
-            
-            newSocket.on('disconnect', (err) => {
-                console.log("Disconnected: ", err.message);
+        if (user) {
+            const sock = io(url, {
+                transports: ['websocket'],
+                query: {
+                    'token': user.token
+                }
             });
     
-            setSocket(newSocket);
-        }
-
-        return () => {
-            if (socket) {
-                newSocket.close();
+            if (sock) {
+                sock.on('connect_error', (err) => {
+                    console.log("Connection Error: ", err);
+                });
+                
+                sock.on('connect_failed', (err) => {
+                    console.log("Connection Failed: ", err.message);
+                });
+                
+                sock.on('disconnect', (err) => {
+                    console.log("Disconnected: ", err.message);
+                });
+        
+                setSocket(sock);
+            }
+    
+            return () => {
+                if (sock) {
+                    sock.close();
+                }
             }
         }
-    }, [user.token]);
+    }, [user]);
 
     return socket;
 };

@@ -12,11 +12,11 @@ export default function HomePage() {
     const socket = useSocketContext();
     const [isSearchVisible, setSearchVisible] = useState(false);
     const [areRulesVisible, setRulesVisible] = useState(false);
-    const navigate = useNavigate();
+    const [gameData, setgameData] = useState({});
 
-    const onGameFound = (gameId) => {
+    const onGameFound = (data) => {
         setSearchVisible(false);
-        navigate(`/game/${gameId}`);
+        setgameData(data);
     };
 
     const gameSearch = () => {
@@ -33,10 +33,6 @@ export default function HomePage() {
             };
         }
     }, [socket]);
-
-    if(!user){
-        return <Navigate to = '/login' />
-    }
 
     return (
         <div className="container">
@@ -80,6 +76,8 @@ export default function HomePage() {
                     Quit game
                 </Link>
             </div>
+            {!user && <Navigate to='/login' />}
+            {Object.keys(gameData).length && <Navigate to='/game' state={gameData}/>}
         </div>
     );
 }

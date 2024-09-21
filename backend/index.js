@@ -70,8 +70,6 @@ io.on('connection', (socket) => {
 			socket.join(gameRoomName)
 			opponentSocket.join(gameRoomName)
 
-			console.log(opponentSocket);
-
 			const currentUser = (await User.findByPk(socket.user.user_id)).toJSON()
 			delete currentUser.password
 			const opponentUser = (await User.findByPk(opponentSocket.user.user_id)).toJSON()

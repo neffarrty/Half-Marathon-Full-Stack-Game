@@ -22,5 +22,5 @@ exports.store = async (req, res) => {
 
 	const token = jwt.sign(payload, config.JWT_SECRET)
 
-	res.json({ token, username: user.username, email: user.email })
+	res.json({ token, username: user.username, email: user.email, avatar: user.avatar })
 }

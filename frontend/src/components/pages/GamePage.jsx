@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext.jsx';
 import useSocketContext from '../../hooks/useSocketContext.jsx';
 import Coins from '../Coins.jsx';
@@ -7,29 +8,31 @@ import Timer from '../Timer.jsx';
 import Player from '../Player.jsx';
 import HandCard from '../HandCard.jsx';
 import GameField from '../GameField.jsx';
+
 import '../../styles/GamePage.css';
 
 export default function GamePage() {
-    const socket = useSocketContext();
+    const { state } = useLocation();
     const { user } = useUserContext();
+    const socket = useSocketContext();
     const [player, setPlayer] = useState({ 
         ...user,
-        health: 30,
-        coins: 1 
+        hand: state.deck,
+        cards: [],
+        hp: 30,
+        coins: 1
     });
     const [opponent, setOpponent] = useState({ 
-        health: 30, 
-        coins: 1 
+        ...state.opponent,
+        hp: 30,
+        coins: 1,
+        hand: 5,
+        cards: []
     });
-    // const [deck, setDeck] = useState([]);
-    const [isPlayerTurn, setIsPlayerTurn] = useState(false);
+    const [isTurn, setIsTurn] = useState(state.turn);
     const [turn, setTurn] = useState(1);
-
-    const onGameStart = ({ opponent, deck, first }) => {
-        // setDeck(deck);
-        setOpponent(prev => ({ ...prev, ...opponent }));
-        setIsPlayerTurn(first);
-    };
+    const [activeCardIndex, setActiveCardIndex] = useState(null);
+    const actions = [];
 
     const onTurnStart = (actions) => {
         actions.forEach(action => {
@@ -63,15 +66,13 @@ export default function GamePage() {
         socket.emit('turn', actions);
         actions.length = 0;
         setOpponent(prev => ({ coins: prev.coins === 10 ? prev.coins : prev.coins + 1}));
-        setIsPlayerTurn(prev => !prev);
+        setIsTurn(prev => !prev);
     };
 
     useEffect(() => {
-        socket.on('game-start', onGameStart);
         socket.on('turn', onTurnStart);
 
         return () => {
-            socket.off('game-start', onGameStart);
             socket.off('turn', onTurnStart);
         }
     }, []);
@@ -80,17 +81,38 @@ export default function GamePage() {
         <div className='game-page'>
             <div className='first-column'>
                 <Coins amount={4} max={10}/>
-                <Timer seconds={60} condition={false} setCondition={false}/>
+                <Timer seconds={60} condition={isTurn} setCondition={setIsTurn}/>
                 <ActionBar actions={[]}/>
-                <Player username={'Andrey'} hp={25} avatar={''}/>
+                <Player 
+                    username={player.username}
+                    hp={player.hp}
+                    avatar={`${import.meta.env.VITE_HOST_URL}${player.avatar}`}
+                />
             </div>
             <div className='second-column'>
-                <HandCard cards={[]} isPlayerCard={false}/>
-                <GameField/>
-                <HandCard cards={[]} isPlayerCard={true}/>
+                <HandCard cards={[...Array(opponent.hand)]} isPlayer={false}/>
+                <GameField
+                    isTurn={isTurn}
+                    setIsTurn={setIsTurn} 
+                    player={player} 
+                    setPlayer={setPlayer} 
+                    opponent={opponent}
+                    activeCardIndex={activeCardIndex}
+                    setActiveCardIndex={setActiveCardIndex}
+                />
+                <HandCard 
+                    cards={player.hand}
+                    isPlayer={true}
+                    activeCardIndex={activeCardIndex}
+                    setActiveCardIndex={setActiveCardIndex}
+                />
             </div>
             <div className='third-column'>
-                <Player username={'Egor'} hp={35} avatar={''}/>
+                <Player 
+                    username={opponent.username}
+                    hp={opponent.hp}
+                    avatar={`${import.meta.env.VITE_HOST_URL}${opponent.avatar}`}
+                />
                 <Coins amount={4} max={10}/>
             </div>
         </div>
