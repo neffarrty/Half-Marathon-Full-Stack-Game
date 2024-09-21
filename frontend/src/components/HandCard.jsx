@@ -3,6 +3,10 @@ import {useState} from 'react';
 import '../styles/HandCard.css';
 
 export default function HandCard({ cards, isPlayer, activeCardIndex, setActiveCardIndex }) {
+    const handleClick = (index) => {
+        setActiveCardIndex(prev => prev === index ? null : index);
+    }
+    
     return isPlayer ?
         <div className='cards-player'>
             {cards.map((hero, index) => (
@@ -10,7 +14,7 @@ export default function HandCard({ cards, isPlayer, activeCardIndex, setActiveCa
                     key={index}
                     hero={hero}
                     isActive={activeCardIndex === index}
-                    onClick={() => setActiveCardIndex(index)}
+                    onClick={() => handleClick(index)}
                     isPlayer={isPlayer}
                 />
             ))}

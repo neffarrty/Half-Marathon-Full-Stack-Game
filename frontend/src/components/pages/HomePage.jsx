@@ -61,12 +61,10 @@ export default function HomePage() {
             {areRulesVisible && (
                 <div id="rules" className="rules">
                     <div className="rules-content">
-                        <div className="rules_btn_cnl" onClick={() => setRulesVisible(false)}>
-                            <span className="text">Quit</span>
-                        </div>
                         <div className="rules-text">
-                            <p>Rules</p>
+                            <p>Congratulations on joining our lively community. Whether you're here to share stories, exchange ideas, or simply monkey around, we're thrilled to have you swinging by!</p>
                         </div>
+                        <button onClick={() => setRulesVisible(false)}>OK</button>
                     </div>
                 </div>
             )}
@@ -77,7 +75,7 @@ export default function HomePage() {
                 </Link>
             </div>
             {!user && <Navigate to='/login' />}
-            {Object.keys(gameData).length && <Navigate to='/game' state={gameData}/>}
+            {Object.keys(gameData).length !== 0 && <Navigate to={`/game/${gameData.gameRoom}`} state={gameData}/>}
         </div>
     );
 }

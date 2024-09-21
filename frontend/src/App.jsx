@@ -17,7 +17,7 @@ export default function App() {
 					<Route path='/register' element={<Register />} />
 					<Route element={<SocketContextLayout />}>
 						<Route path='/home' element={<HomePage />} />
-						<Route path='/game' element={<GamePage />} />
+						<Route path='/game/:id' element={<GamePage />} />
 					</Route>
 					<Route path='*' element={<NotFound />} />
 				</Routes>

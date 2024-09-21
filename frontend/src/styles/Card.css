@@ -13,9 +13,10 @@
     font-family: "JejuHallasan", sans-serif;
 }
 
-.card-container:not(:last-child){
+.card-container:not(:last-child) {
     margin-right: 30px;
 }
+
 .card-container.animate {
     transform: translateY(-200px);
     scale: 1.2;
@@ -76,7 +77,7 @@
     text-align: justify;
     padding: 5px;
     line-height: 0.6;
-
+    overflow: hidden;
 }
 
 .text-box span {

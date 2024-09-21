@@ -1,4 +1,4 @@
-.rules{
+.rules {
     position: fixed;
     top:0;
     left: 0;
@@ -10,43 +10,37 @@
     align-items: center;
 }
 
-.rules-content{
-    position: relative;
-    width: 900px;
-    height: 850px;
+.rules-content {
+    background: url('../assets/monkey.png');
+    font-family: sans-serif;
+    background-size: contain;
+    width: 650px;
+    height: 400px;
     background-color: black;
-    opacity: 85%;
     padding: 20px;
     border-radius: 15px;
-    text-align: center;
     border: 2px solid white;
     box-shadow: 0 0 15px 2px #000000;
 }
 
-.rules_btn_cnl{
-    position: absolute;
-    top: 3%;
-    border: 2px solid white;
-    width: 80px;
-    border-radius: 15px;
-    transition: background-color 0.3s ease;
-}
-.rules_btn_cnl:hover{
-    background: lightgrey;
-}
-
-.rules-text{
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.rules-content button {
+    position: relative;
+    top: 75%;
+    width: 100%;
+    padding: 10px;
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
 }
 
-.rules-text p{
-    font-size: 36px;
+.rules-text p {
+    text-align: start;
     color: white;
 }
 
-.hidden{
+.hidden {
     display: none;
 }

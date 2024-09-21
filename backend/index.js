@@ -41,6 +41,29 @@ io.use(middlewares.isSocketAuth)
 io.on('connection', (socket) => {
 	console.log('a user connected with socket: ', socket.id)
 
+	socket.on('turn', (value) => {
+		const { gameRoom } = value
+		const rooms = io.sockets.adapter.rooms
+		const room = rooms.get(gameRoom)
+		const opponentSocketId = [ ...room ].filter(id => id !== socket.id)[0]
+		const opponentSocket = io.sockets.sockets.get(opponentSocketId)
+	
+		opponentSocket.emit('turn')
+	})
+	
+
+	socket.on('action', async (value) => {
+		// validate value
+	
+		const { gameRoom } = value
+		const rooms = io.sockets.adapter.rooms
+		const room = rooms.get(gameRoom)
+		const opponentSocketId = [ ...room ].filter(id => id !== socket.id)[0]
+		const opponentSocket = io.sockets.sockets.get(opponentSocketId)
+	
+		opponentSocket.emit('action', value)
+	})
+	
 	socket.on('game-search', async (value) => {
 		console.log('game search', socket.id)
 		const rooms = io.sockets.adapter.rooms
@@ -85,12 +108,14 @@ io.on('connection', (socket) => {
 			socket.emit('game-found', { 
 				opponent: opponentUser,
 				deck: opponentCards,
-				turn: isCurrentUserFirstTurn
+				turn: isCurrentUserFirstTurn,
+				gameRoom: gameRoomName
 			})
 			opponentSocket.emit('game-found', {
 				opponent: currentUser,
 				deck: currentUserCards,
-				turn: isOpponentFirstTurn
+				turn: isOpponentFirstTurn,
+				gameRoom: gameRoomName
 			})
 		}
 	})

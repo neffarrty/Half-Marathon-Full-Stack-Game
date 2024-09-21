@@ -1,7 +1,9 @@
-import {useEffect, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import useUserContext from '../../hooks/useUserContext.jsx';
 import useSocketContext from '../../hooks/useSocketContext.jsx';
+
 import Coins from '../Coins.jsx';
 import ActionBar from '../ActionBar.jsx';
 import Timer from '../Timer.jsx';
@@ -12,86 +14,76 @@ import GameField from '../GameField.jsx';
 import '../../styles/GamePage.css';
 
 export default function GamePage() {
-    const { state } = useLocation();
-    const { user } = useUserContext();
     const socket = useSocketContext();
+    const { user } = useUserContext();
+    const { state } = useLocation();
     const [player, setPlayer] = useState({ 
         ...user,
-        hand: state.deck,
-        cards: [],
         hp: 30,
-        coins: 1
+        coins: 1,
+        hand: state.deck,
+        cards: []
     });
     const [opponent, setOpponent] = useState({ 
         ...state.opponent,
         hp: 30,
         coins: 1,
         hand: 5,
-        cards: [{
-            "name": "Captain America",
-            "img": "/images/cards/captain-america.png",
-            "description": "Captain America is a super-soldier known for his unwavering sense of justice, leadership, and dedication to protecting freedom. Armed with his iconic shield, he fights to defend the world from evil forces.",
-            "cost": 7,
-            "attack": 6,
-            "defense": 6,
-            "bg_color": "#3b5998",
-            "bg_text_color": "#3b5900"
-        }]
+        cards: []
     });
     const [isTurn, setIsTurn] = useState(state.turn);
-    const [turn, setTurn] = useState(1);
+    const [turn, setTurn] = useState(state.turn ? 1 : 0);
     const [activeCardIndex, setActiveCardIndex] = useState(null);
-    const actions = [];
+    const [actions, setActions] = useState([]);
 
-    const onTurnStart = (actions) => {
-        actions.forEach(action => {
-            if (action.type === 'PLAY') {
-                // TODO handling opponents play card on field
-                setOpponent(prev => ({ 
-                    ...prev,
-                    field: [...prev.field, action.card],
-                    cards: prev.cards - 1
-                }));
-            }
-            else {
-                // TODO opponents attack card or player
-                setPlayer(prev => ({
-                    ...prev,
-                    field: prev.field.map(card =>
-                    card.id === action.target.id 
-                    ? { ...card, defense: card.defense - action.card.defense } 
-                    : card
-                    )
-                }));
-            }
-        });
+    const onAction = (action) => {
+        if (action.type === 'play') {
+            setOpponent(prev => ({ 
+                ...prev,
+                cards: [...prev.cards, action.card],
+                hand: prev.hand - 1,
+                coins: prev.coins - action.card.cost
+            }));
+            setActions(prev => [...prev, action]);
+        }
+        // else {
+        //     // TODO opponents attack card or player
+        //     setPlayer(prev => ({
+        //         ...prev,
+        //         field: prev.field.map(card =>
+        //         card.id === action.target.id 
+        //         ? { ...card, defense: card.defense - action.card.defense } 
+        //         : card
+        //         )
+        //     }));
+        // }
+    }
 
-        // set turn and coins according to the turn num
+    const onTurnStart = () => { 
+        setIsTurn(true);
         setTurn(prev => prev + 1);
-        setPlayer(prev => ({ coins: prev.coins === 10 ? prev.coins : prev.coins + 1}));
-    };
-
-    const onTurnEnd = () => {
-        socket.emit('turn', actions);
-        actions.length = 0;
-        setOpponent(prev => ({ coins: prev.coins === 10 ? prev.coins : prev.coins + 1}));
-        setIsTurn(prev => !prev);
     };
 
     useEffect(() => {
         socket.on('turn', onTurnStart);
+        socket.on('action', onAction);
 
         return () => {
             socket.off('turn', onTurnStart);
+            socket.off('action', onAction);
         }
     }, []);
+
+    useEffect(() => {
+        setPlayer(prev => ({ ...prev, coins: turn > 10 ? 10 : turn }));
+    }, [turn]);
     
     return (
         <div className='game-page'>
             <div className='first-column'>
-                <Coins amount={4} max={10}/>
+                <Coins amount={opponent.coins} max={10}/>
                 <Timer seconds={60} condition={isTurn} setCondition={setIsTurn}/>
-                <ActionBar actions={[]}/>
+                <ActionBar actions={actions}/>
                 <Player 
                     username={player.username}
                     hp={player.hp}
@@ -102,12 +94,15 @@ export default function GamePage() {
                 <HandCard cards={[...Array(opponent.hand)]} isPlayer={false}/>
                 <GameField
                     isTurn={isTurn}
-                    setIsTurn={setIsTurn} 
+                    setIsTurn={setIsTurn}
+                    turn={turn}
                     player={player} 
                     setPlayer={setPlayer} 
                     opponent={opponent}
+                    setOpponent={setOpponent}
                     activeCardIndex={activeCardIndex}
                     setActiveCardIndex={setActiveCardIndex}
+                    setActions={setActions}
                 />
                 <HandCard 
                     cards={player.hand}
@@ -122,7 +117,7 @@ export default function GamePage() {
                     hp={opponent.hp}
                     avatar={`${import.meta.env.VITE_HOST_URL}${opponent.avatar}`}
                 />
-                <Coins amount={4} max={10}/>
+                <Coins amount={player.coins} max={10}/>
             </div>
         </div>
     );
