@@ -3,9 +3,11 @@ const { createServer } = require('node:http')
 const { Server } = require('socket.io')
 const { v4: uuidv4 } = require('uuid')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 const sequelize = require('./utils/db')
 const config = require('./utils/config')
 const middlewares = require('./utils/middlewares')
+const { getRandomElements } = require('./utils/functions')
 
 const User = require('./models/user')
 const Card = require('./models/card')
@@ -16,9 +18,15 @@ const gameRouter = require('./routes/game')
 
 const app = express()
 const server = createServer(app)
-const io = new Server(server)
+const io = new Server(server,   {
+	cors: {
+		origin: "*",
+		methods: ["GET", "POST"],
+		credentials: true
+}})
 
 app.use(express.json())
+app.use(cors())
 app.use(express.static('public'))
 app.use(middlewares.tokenExtractor)
 
