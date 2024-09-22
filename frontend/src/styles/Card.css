@@ -24,6 +24,7 @@
 
 .card-container.opponent {
     background: url('../assets/marvel-bkg.png') no-repeat center center;
+    background-size: cover;
 }
 
 .top-section {

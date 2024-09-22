@@ -65,7 +65,13 @@ io.on('connection', (socket) => {
 	
 		opponentSocket.emit('action', value)
 	})
-	
+
+	socket.on('game-end', async (value) => {
+		const { gameRoom } = value
+
+		socket.leave(gameRoom)
+	})
+
 	socket.on('game-search', async (value) => {
 		console.log('game search', socket.id)
 		const rooms = io.sockets.adapter.rooms

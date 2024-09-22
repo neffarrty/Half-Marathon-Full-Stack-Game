@@ -1,8 +1,8 @@
 import '../styles/Player.css';
 
-export default function Player({ username, hp, avatar }) {
+export default function Player({ username, hp, avatar, onClick }) {
     return (
-        <div className='player-container'>
+        <div className='player-container' onClick={onClick}>
             <div className='player-username-container'>
                 <span>{username}</span>
             </div>

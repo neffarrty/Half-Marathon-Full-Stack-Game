@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useLocation} from 'react-router-dom';
 import useSocketContext from '../hooks/useSocketContext';
 import Card from './Card';
 import '../styles/GameField.css';
 
-export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, opponent, setOpponent, activeCardIndex, setActiveCardIndex, setActions }) {
+export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, opponent, setOpponent, activeCardIndex, setActiveCardIndex, setActions, attackCard, setAttackCard, usedCards, setUsedCards }) {
     const socket = useSocketContext();
     const { state } = useLocation();
-    const [attackCard, setAttackCard] = useState(null);
     const [targetCard, setTargetCard] = useState(null);
-    const [usedCards, setUsedCards] = useState([]);
     
     useEffect(() => {        
         if (targetCard !== null) {
             const action = { 
                 user: player.username, 
-                type: 'attack', 
+                type: 'attack-card',
                 target: opponent.cards.find(card => card.id === targetCard),
                 card: player.cards.find(card => card.id === attackCard),
                 gameRoom: state.gameRoom
@@ -64,7 +62,7 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
         
                 const action = { 
                     user: player.username, 
-                    type: 'play', 
+                    type: 'play-card',
                     card: selectedCard, 
                     gameRoom: state.gameRoom
                 };
@@ -98,12 +96,6 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
         }
     };
 
-    // const handleOpponentClick = () => {
-    //     if (attackCard !== null && isTurn) {
-    //         setTarget({});
-    //     }
-    // };
-
     const handleEndTurn = () => {
         setIsTurn(prev => !prev);
         setAttackCard(null);
@@ -117,15 +109,6 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
 
         socket.emit('turn', { gameRoom: state.gameRoom });
     }
-    
-    // useEffect(() => {
-    //     console.log(attackCard, targetCard);
-    // }, [attackCard, targetCard]);
-
-    // useEffect(() => {
-    //     console.log(usedCards);
-    //     console.log(usedCards.includes(attackCard));
-    // }, [usedCards]);
     
     return(
         <div className='game-field'>

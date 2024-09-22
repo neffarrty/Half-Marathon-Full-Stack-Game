@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {Navigate} from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext';
 import useSocketContext from '../../hooks/useSocketContext';
 import useAuth from '../../hooks/useAuth';
 
-import '../../styles/menu.css';
-import '../../styles/start_game.css';
-import '../../styles/rules.css';
+import '../../styles/HomePage.css';
+import '../../styles/StartGameButton.css';
+import '../../styles/Rules.css';
 
 export default function HomePage() {
     const { user } = useUserContext();
