@@ -7,47 +7,73 @@ import '../styles/GameField.css';
 export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, opponent, setOpponent, activeCardIndex, setActiveCardIndex, setActions }) {
     const socket = useSocketContext();
     const { state } = useLocation();
-    const [activeCard, setActiveCard] = useState(null);
+    const [attackCard, setAttackCard] = useState(null);
     const [targetCard, setTargetCard] = useState(null);
     const [usedCards, setUsedCards] = useState([]);
     
-    useEffect(() => {
-        console.log(activeCard, targetCard);
-        if (usedCards.includes(activeCard)) {
-            setActiveCard(null);
-            setTargetCard(null);
-        }
-        
-        if (targetCard !== null && activeCard !== null) {
+    useEffect(() => {        
+        if (targetCard !== null) {
             const action = { 
                 user: player.username, 
                 type: 'attack', 
-                target: opponent.cards[targetCard],
-                card: player.cards[activeCard],
+                target: opponent.cards.find(card => card.id === targetCard),
+                card: player.cards.find(card => card.id === attackCard),
                 gameRoom: state.gameRoom
             };
 
-            setUsedCards(prev => [...prev, activeCard]);
+            setPlayer(prev => ({ 
+                ...prev, 
+                cards: prev.cards.map((card) => {
+                    if (card.id === attackCard) {
+                        return { 
+                            ...card,
+                            defense: card.defense - opponent.cards.find(card => card.id === targetCard).attack 
+                        };
+                    }
+                    return card;
+                })
+            }));
+            setOpponent(prev => ({ 
+                ...prev, 
+                cards: prev.cards.map((card) => {
+                    if (card.id === targetCard) {
+                        return { 
+                            ...card, 
+                            defense: card.defense - player.cards.find(card => card.id === attackCard).attack 
+                        };
+                    }
+                    return card;
+                })
+            }));
+            setUsedCards(prev => [...prev, attackCard]);
             setActions(prev => [...prev, action]);
-            setActiveCard(null);
-            setTargetCard(null);
 
             socket.emit('action', action);
         }
-    }, [activeCard, targetCard]);
+    }, [targetCard]);
 
     useEffect(() => {
-        console.log(usedCards);
-    }, [usedCards]);
+        const timeout = setTimeout(() => {
+            setPlayer(prev => ({ 
+                ...prev, 
+                cards: prev.cards.filter((card) => card.defense > 0)
+            }));
+            setOpponent(prev => ({ 
+                ...prev, 
+                cards: prev.cards.filter((card) => card.defense > 0)
+            }));
+        }, 2000);
 
-    useEffect(() => {
-        setActiveCard(null);
-        setTargetCard(null);
-        setUsedCards([]);
-    }, [isTurn]);
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [player.cards, opponent.cards]);
 
     const handleEndTurn = () => {
         setIsTurn(prev => !prev);
+        setAttackCard(null);
+        setTargetCard(null);
+        setUsedCards([]);
         setOpponent(prev => ({ ...prev, coins: turn > 10 ? 10 : turn }));
         socket.emit('turn', { gameRoom: state.gameRoom });
     }
@@ -80,27 +106,51 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
             }
         }
     };
+
+    const handlePlayerCardClick = (id) => {
+        if (attackCard !== id && !usedCards.includes(id) && isTurn) {
+            setAttackCard(id);
+        }
+        else {
+            setAttackCard(null);
+        }
+    };
+
+    const handleOpponentCardClick = (id) => {
+        if (attackCard !== null && isTurn) {
+            setTargetCard(id);
+        }
+    };
+    
+    useEffect(() => {
+        console.log(attackCard, targetCard);
+    }, [attackCard, targetCard]);
+
+    useEffect(() => {
+        console.log(usedCards);
+        console.log(usedCards.includes(attackCard));
+    }, [usedCards]);
     
     return(
         <div className='game-field'>
             <div className='opponent-cards'>
-                {opponent.cards.map((hero, index) => (
+                {opponent.cards.map((card) => (
                     <Card
-                        key={index}
-                        hero={hero}
+                        key={card.id}
+                        hero={card}
                         isPlayer={true}
-                        onClick={() => setTargetCard(index)}
+                        onClick={() => handleOpponentCardClick(card.id)}
                     />
                 ))}
             </div>
             <div className='center-line'></div>
-            <div className="player-cards">
-                {player.cards.map((card, index) => (
+            <div className='player-cards'>
+                {player.cards.map((card) => (
                     <Card 
-                        key={index} 
+                        key={card.id} 
                         hero={card} 
                         isPlayer={true}
-                        onClick={() => setActiveCard(index)}
+                        onClick={() => handlePlayerCardClick(card.id)}
                     />
                 ))}
             </div>

@@ -47,7 +47,7 @@ export default function GamePage() {
             setActions(prev => [...prev, action]);
         }
         // else {
-        //     // TODO opponents attack card or player
+        //
         //     setPlayer(prev => ({
         //         ...prev,
         //         field: prev.field.map(card =>
