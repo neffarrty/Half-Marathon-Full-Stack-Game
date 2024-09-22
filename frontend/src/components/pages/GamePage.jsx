@@ -44,19 +44,30 @@ export default function GamePage() {
                 hand: prev.hand - 1,
                 coins: prev.coins - action.card.cost
             }));
-            setActions(prev => [...prev, action]);
         }
-        // else {
-        //
-        //     setPlayer(prev => ({
-        //         ...prev,
-        //         field: prev.field.map(card =>
-        //         card.id === action.target.id 
-        //         ? { ...card, defense: card.defense - action.card.defense } 
-        //         : card
-        //         )
-        //     }));
-        // }
+        else {
+            setPlayer(prev => ({
+                ...prev,
+                cards: prev.cards.map(card => {
+                    if (card.id === action.target.id) {
+                        return { ...card, defense: card.defense - action.card.attack };
+                    }
+                    return card;
+                })
+            }));
+
+            setOpponent(prev => ({
+                ...prev,
+                cards: prev.cards.map(card => {
+                    if (card.id === action.card.id) {
+                        return { ...card, defense: card.defense - action.target.attack };
+                    }
+                    return card;
+                })
+            }));
+        }
+
+        setActions(prev => [...prev, action]);
     }
 
     const onTurnStart = () => { 
@@ -77,6 +88,23 @@ export default function GamePage() {
     useEffect(() => {
         setPlayer(prev => ({ ...prev, coins: turn > 10 ? 10 : turn }));
     }, [turn]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setPlayer(prev => ({ 
+                ...prev, 
+                cards: prev.cards.filter((card) => card.defense > 0)
+            }));
+            setOpponent(prev => ({ 
+                ...prev, 
+                cards: prev.cards.filter((card) => card.defense > 0)
+            }));
+        }, 2000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [player.cards, opponent.cards]);
     
     return (
         <div className='game-page'>

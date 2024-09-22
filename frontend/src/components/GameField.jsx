@@ -47,36 +47,12 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
             }));
             setUsedCards(prev => [...prev, attackCard]);
             setActions(prev => [...prev, action]);
+            setAttackCard(null);
+            setTargetCard(null);
 
             socket.emit('action', action);
         }
     }, [targetCard]);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setPlayer(prev => ({ 
-                ...prev, 
-                cards: prev.cards.filter((card) => card.defense > 0)
-            }));
-            setOpponent(prev => ({ 
-                ...prev, 
-                cards: prev.cards.filter((card) => card.defense > 0)
-            }));
-        }, 2000);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, [player.cards, opponent.cards]);
-
-    const handleEndTurn = () => {
-        setIsTurn(prev => !prev);
-        setAttackCard(null);
-        setTargetCard(null);
-        setUsedCards([]);
-        setOpponent(prev => ({ ...prev, coins: turn > 10 ? 10 : turn }));
-        socket.emit('turn', { gameRoom: state.gameRoom });
-    }
 
     const handlePlaceCard = () => {
         if (activeCardIndex !== null) {           
@@ -121,15 +97,30 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
             setTargetCard(id);
         }
     };
-    
-    useEffect(() => {
-        console.log(attackCard, targetCard);
-    }, [attackCard, targetCard]);
 
-    useEffect(() => {
-        console.log(usedCards);
-        console.log(usedCards.includes(attackCard));
-    }, [usedCards]);
+    // const handleOpponentClick = () => {
+    //     if (attackCard !== null && isTurn) {
+    //         setTarget({});
+    //     }
+    // };
+
+    const handleEndTurn = () => {
+        setIsTurn(prev => !prev);
+        setAttackCard(null);
+        setTargetCard(null);
+        setUsedCards([]);
+        setOpponent(prev => ({ ...prev, coins: turn > 10 ? 10 : turn }));
+        socket.emit('turn', { gameRoom: state.gameRoom });
+    }
+    
+    // useEffect(() => {
+    //     console.log(attackCard, targetCard);
+    // }, [attackCard, targetCard]);
+
+    // useEffect(() => {
+    //     console.log(usedCards);
+    //     console.log(usedCards.includes(attackCard));
+    // }, [usedCards]);
     
     return(
         <div className='game-field'>
