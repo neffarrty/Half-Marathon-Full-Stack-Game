@@ -1,9 +1,13 @@
 import '../styles/Card.css';
 
-export default function Card({ hero, onClick, isActive, isPlayer }) {
+export default function Card({ hero, onClick, isActive, isPlayer, isActiveOnField }) {
     return isPlayer ? (
                 <button
-                    className={`card-container ${isActive ? 'animate' : ''} ${isPlayer? '' : 'opponent'}`}
+                    className={`card-container 
+                    ${isActive ? 'animate' : ''} 
+                    ${isPlayer? '' : 'opponent'}
+                    ${isActiveOnField? 'blink' : ''}
+                    `}
                     style={{ backgroundColor: hero['bg_color'] }}
                     onClick={onClick}
                 >

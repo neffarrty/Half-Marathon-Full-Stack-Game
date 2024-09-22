@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useLocation} from 'react-router-dom';
 
 import useUserContext from '../../hooks/useUserContext.jsx';
 import useSocketContext from '../../hooks/useSocketContext.jsx';
@@ -12,6 +12,7 @@ import HandCard from '../HandCard.jsx';
 import GameField from '../GameField.jsx';
 
 import '../../styles/GamePage.css';
+import Card from "../Card.jsx";
 
 export default function GamePage() {
     const socket = useSocketContext();
@@ -145,6 +146,9 @@ export default function GamePage() {
                     hp={opponent.hp}
                     avatar={`${import.meta.env.VITE_HOST_URL}${opponent.avatar}`}
                 />
+                <div className="card-cnt">
+                    <Card/>
+                </div>
                 <Coins amount={player.coins} max={10}/>
             </div>
         </div>

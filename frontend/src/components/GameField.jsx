@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useLocation} from 'react-router-dom';
 import useSocketContext from '../hooks/useSocketContext';
 import Card from './Card';
 import '../styles/GameField.css';
@@ -137,11 +137,12 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
             <div className='center-line'></div>
             <div className='player-cards'>
                 {player.cards.map((card) => (
-                    <Card 
-                        key={card.id} 
-                        hero={card} 
+                    <Card
+                        key={card.id}
+                        hero={card}
                         isPlayer={true}
                         onClick={() => handlePlayerCardClick(card.id)}
+                        isActiveOnField={attackCard === card.id}
                     />
                 ))}
             </div>

@@ -31,9 +31,15 @@
 .third-column {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     width: 25%;
     height: 100vh;
     padding: 20px;
-    gap: 75%;
+}
+.card-cnt{
+    height: 240px;
+    position: relative;
+    top: 200px;
+    left: 45px;
 }
