@@ -5,9 +5,9 @@
     height: 100%;
 }
 
-.container{
+.container {
     font-family: "JejuHallasan", sans-serif;
-    background: url("../assets/homepage.jpg") no-repeat center center;
+    background: url("../assets/homepage-background.jpg") no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;

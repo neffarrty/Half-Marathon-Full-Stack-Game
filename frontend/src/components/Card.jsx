@@ -2,7 +2,7 @@ import '../styles/Card.css';
 
 export default function Card({ hero, onClick, isActive, isPlayer, isActiveOnField }) {
     return isPlayer ? (
-                <button
+                <div
                     className={`card-container 
                     ${isActive ? 'animate' : ''} 
                     ${isPlayer? '' : 'opponent'}
@@ -31,7 +31,7 @@ export default function Card({ hero, onClick, isActive, isPlayer, isActiveOnFiel
                             <div className='shield-icon'><span className='score-shield'>{hero.defense}</span></div>
                         </div>
                     </div>
-                </button>
+                </div>
             ):
         <div className='card-container opponent'></div>
 };

@@ -55,8 +55,6 @@ io.on('connection', (socket) => {
 	
 
 	socket.on('action', async (value) => {
-		// validate value
-	
 		const { gameRoom } = value
 		const rooms = io.sockets.adapter.rooms
 		const room = rooms.get(gameRoom)
@@ -68,12 +66,11 @@ io.on('connection', (socket) => {
 
 	socket.on('game-end', async (value) => {
 		const { gameRoom } = value
-
 		socket.leave(gameRoom)
+		console.log(`a user with id ${socket.id} leaved ${gameRoom}`)
 	})
 
 	socket.on('game-search', async (value) => {
-		console.log('game search', socket.id)
 		const rooms = io.sockets.adapter.rooms
 		if (!rooms.has('waiting_room') || rooms.get('waiting_room').size === 0) {
 			console.log('join waiting room', socket.id)

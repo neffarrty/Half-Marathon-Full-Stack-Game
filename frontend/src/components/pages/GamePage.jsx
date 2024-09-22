@@ -86,11 +86,12 @@ export default function GamePage() {
     useEffect(() => {
         if(player.hp < 1) {
             setWinner(false);
+            socket.emit('game-end', { gameRoom: state.gameRoom });
         }
         else if(opponent.hp < 1) {
             setWinner(true);
+            socket.emit('game-end', { gameRoom: state.gameRoom });
         }
-        socket.emit('game-end', { gameRoom: state.gameRoom });
     }, [player.hp, opponent.hp]);
 
     const onTurnStart = (data) => {

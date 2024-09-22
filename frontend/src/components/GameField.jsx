@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import useSocketContext from '../hooks/useSocketContext';
 import Card from './Card';
 import '../styles/GameField.css';

@@ -1,5 +1,4 @@
 import Card from './Card.jsx';
-import {useState} from 'react';
 import '../styles/HandCard.css';
 
 export default function HandCard({ cards, isPlayer, activeCardIndex, setActiveCardIndex }) {

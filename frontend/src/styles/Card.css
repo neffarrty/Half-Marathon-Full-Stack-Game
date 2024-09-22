@@ -23,7 +23,7 @@
 }
 
 .card-container.opponent {
-    background: url('../assets/marvel-bkg.png') no-repeat center center;
+    background: url('../assets/marvel-cover.png') no-repeat center center;
     background-size: cover;
 }
 

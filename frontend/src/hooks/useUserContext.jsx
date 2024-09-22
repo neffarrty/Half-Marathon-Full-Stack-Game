@@ -6,7 +6,7 @@ export default function useUserContext() {
 
     if (context === undefined) {
         throw new Error('useUserContext must be used within a UserContextProvider')       
-}
+    }
 
     return context;
 };
