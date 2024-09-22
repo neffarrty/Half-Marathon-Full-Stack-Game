@@ -1,18 +1,15 @@
 @import url(https://db.onlinewebfonts.com/c/2da952d097bffd198ec0f0aa3fdd6804?family=JejuHallasan);
 
-/* #root {
-    width: 100%;
-    height: 100%;
-} */
-
 .game-page {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: url('../assets/field.jpg') no-repeat center center;
     overflow: hidden;
+    position: relative;
+    font-family: "JejuHallasan", sans-serif;
 }
 
 .first-column {
@@ -23,6 +20,7 @@
     height: 100vh;
     gap: 80px;
     padding: 20px;
+    justify-content: space-between;
 }
 
 .second-column {
@@ -36,9 +34,41 @@
 .third-column {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     width: 25%;
     height: 100vh;
     padding: 20px;
-    gap: 75%;
+}
+
+.card-cnt {
+    height: 240px;
+    position: relative;
+    top: 200px;
+    left: 45px;
+}
+
+.result {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 350px;
+    background-color: black;
+    opacity: 85%;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid white;
+    box-shadow: 0 0 15px 2px #000000;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+}
+
+.result a {
+    color: white;
+    font-size: 50px;
 }

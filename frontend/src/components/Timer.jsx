@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/Timer.css'
 
 export default function Timer({ seconds, condition, setCondition }) {
@@ -25,12 +25,6 @@ export default function Timer({ seconds, condition, setCondition }) {
         <div>
             <div className='time'>Time: {time}</div>
             <div>{condition}</div>
-{/*            <button
-                onClick={() => setCondition(prev => !prev) }
-                disabled={!condition}
-            >
-                { condition ? 'End turn' : 'Opponent\' turn' }
-            </button>*/}
         </div>
     );
 };

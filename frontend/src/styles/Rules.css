@@ -1,0 +1,46 @@
+.rules {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rules-content {
+    background: url('../assets/monkey.png');
+    font-family: sans-serif;
+    background-size: contain;
+    width: 650px;
+    height: 400px;
+    background-color: black;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid white;
+    box-shadow: 0 0 15px 2px #000000;
+}
+
+.rules-content button {
+    position: relative;
+    top: 75%;
+    width: 100%;
+    padding: 10px;
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+.rules-text p {
+    text-align: start;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
