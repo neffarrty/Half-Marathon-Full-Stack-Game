@@ -41,14 +41,16 @@ io.use(middlewares.isSocketAuth)
 io.on('connection', (socket) => {
 	console.log('a user connected with socket: ', socket.id)
 
-	socket.on('turn', (value) => {
+	socket.on('turn', async (value) => {
 		const { gameRoom } = value
 		const rooms = io.sockets.adapter.rooms
 		const room = rooms.get(gameRoom)
 		const opponentSocketId = [ ...room ].filter(id => id !== socket.id)[0]
 		const opponentSocket = io.sockets.sockets.get(opponentSocketId)
-	
-		opponentSocket.emit('turn')
+		const cards = await Card.findAll()
+    	const randomCard = getRandomElements(cards, 1)[0]
+
+   		opponentSocket.emit('turn', { card: randomCard })
 	})
 	
 

@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import useUserContext from '../../hooks/useUserContext.jsx';
 import useSocketContext from '../../hooks/useSocketContext.jsx';
@@ -22,7 +22,7 @@ export default function GamePage() {
         ...user,
         hp: 30,
         coins: 1,
-        hand: state.deck,
+        hand: [...state.deck],
         cards: []
     });
     const [opponent, setOpponent] = useState({ 
@@ -36,6 +36,7 @@ export default function GamePage() {
     const [turn, setTurn] = useState(state.turn ? 1 : 0);
     const [activeCardIndex, setActiveCardIndex] = useState(null);
     const [actions, setActions] = useState([]);
+    const [deckCard, setDeckCard] = useState(null);
 
     const onAction = (action) => {
         if (action.type === 'play') {
@@ -71,9 +72,25 @@ export default function GamePage() {
         setActions(prev => [...prev, action]);
     }
 
-    const onTurnStart = () => { 
+    const onTurnStart = (data) => {
+        const { card } = data;
+        
         setIsTurn(true);
         setTurn(prev => prev + 1);
+        setDeckCard(card);
+        
+        setTimeout(() => {
+            setPlayer(prev => {
+                if (prev.hand.length < 7) {
+                    return {
+                        ...prev,
+                        hand: [...prev.hand, card]
+                    };
+                }
+                return prev;
+            });
+            setDeckCard(null);
+        }, 3000);
     };
 
     useEffect(() => {
@@ -147,7 +164,7 @@ export default function GamePage() {
                     avatar={`${import.meta.env.VITE_HOST_URL}${opponent.avatar}`}
                 />
                 <div className="card-cnt">
-                    <Card/>
+                    {deckCard && <Card hero={deckCard} isPlayer={true} />}
                 </div>
                 <Coins amount={player.coins} max={10}/>
             </div>

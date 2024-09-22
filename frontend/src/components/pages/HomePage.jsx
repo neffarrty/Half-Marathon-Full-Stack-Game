@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext';
 import useSocketContext from '../../hooks/useSocketContext';
+import useAuth from '../../hooks/useAuth';
 
 import '../../styles/menu.css';
 import '../../styles/start_game.css';
@@ -9,6 +10,7 @@ import '../../styles/rules.css';
 
 export default function HomePage() {
     const { user } = useUserContext();
+    const { logout } = useAuth();
     const socket = useSocketContext();
     const [isSearchVisible, setSearchVisible] = useState(false);
     const [areRulesVisible, setRulesVisible] = useState(false);
@@ -69,10 +71,8 @@ export default function HomePage() {
                 </div>
             )}
 
-            <div className="button">
-                <Link to='/login' style={{ color: 'white', textDecoration: 'none' }}>
-                    Quit game
-                </Link>
+            <div className="button" onClick={() => logout()}>
+                Logout
             </div>
             {!user && <Navigate to='/login' />}
             {Object.keys(gameData).length !== 0 && <Navigate to={`/game/${gameData.gameRoom}`} state={gameData}/>}

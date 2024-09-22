@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import useSocketContext from '../hooks/useSocketContext';
 import Card from './Card';
 import '../styles/GameField.css';
@@ -59,7 +59,7 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
             const hand = [...player.hand];
             const selectedCard = hand[activeCardIndex];
     
-            if (selectedCard.cost <= player.coins) {
+            if (selectedCard.cost <= player.coins && !player.cards.some(card => card.id === selectedCard.id)) {
                 hand.splice(activeCardIndex, 1);
         
                 const action = { 
@@ -109,7 +109,12 @@ export default function GameField({ isTurn, setIsTurn, turn, player, setPlayer, 
         setAttackCard(null);
         setTargetCard(null);
         setUsedCards([]);
-        setOpponent(prev => ({ ...prev, coins: turn > 10 ? 10 : turn }));
+        setOpponent(prev => ({ 
+            ...prev, 
+            coins: turn > 10 ? 10 : turn,
+            hand: prev.hand < 7 ? prev.hand + 1 : prev.hand
+        }));
+
         socket.emit('turn', { gameRoom: state.gameRoom });
     }
     
